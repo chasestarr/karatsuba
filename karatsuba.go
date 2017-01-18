@@ -15,6 +15,13 @@ func Multiply(a, b string) string {
 		return strconv.Itoa(intA * intB)
 	}
 
+	if len(a)%2 == 1 {
+		a = "0" + a
+	}
+	if len(b)%2 == 1 {
+		b = "0" + b
+	}
+
 	// added to fix uneven length factors
 	a, b = addZeroFront(a, b)
 
@@ -25,12 +32,13 @@ func Multiply(a, b string) string {
 
 	// recursive calls
 	z0 := Multiply(low1, low2)
-	z1 := add(Multiply(low1, high2), Multiply(low2, high1))
+	z1 := Multiply(add(low1, high1), add(low2, high2))
 	z2 := Multiply(high1, high2)
 
-	t0 := add(addZeroEnd(z0, m*2), addZeroEnd(z1, m))
-	t1 := add(t0, z2)
-	return trim(t1)
+	t0 := sub(sub(z1, z2), z0)
+	t1 := add(addZeroEnd(z0, m*2), addZeroEnd(t0, m))
+	t2 := add(t1, z2)
+	return trim(t2)
 }
 
 func getMiddle(a, b string) int {
@@ -89,5 +97,28 @@ func add(a, b string) string {
 		return strconv.Itoa(carry) + sum
 	}
 
+	return sum
+}
+
+// does not work with negative number results
+func sub(a, b string) string {
+	var sum string
+	var carry int
+	a, b = addZeroFront(a, b)
+
+	for i := len(a) - 1; i >= 0; i-- {
+		intA, _ := strconv.Atoi(a[i : i+1])
+		intB, _ := strconv.Atoi(b[i : i+1])
+
+		var sumDigit = intA - intB - carry
+		carry = 0
+
+		if sumDigit < 0 {
+			sumDigit += 10
+			carry = 1
+		}
+
+		sum = strconv.Itoa(sumDigit) + sum
+	}
 	return sum
 }

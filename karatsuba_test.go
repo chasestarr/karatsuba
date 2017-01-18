@@ -2,10 +2,37 @@ package karatsuba
 
 import "testing"
 
+func TestSub(t *testing.T) {
+	a := "5678"
+	b := "1234"
+	correct := "4444"
+	if prod := sub(a, b); prod != correct {
+		t.Fatal(a, "*", b, "is incorrect, expected:", correct, "received:", prod)
+	}
+}
+
+func Test2Digit(t *testing.T) {
+	a := "12"
+	b := "43"
+	correct := "516"
+	if prod := Multiply(a, b); prod != correct {
+		t.Fatal(a, "*", b, "is incorrect, expected:", correct, "received:", prod)
+	}
+}
+
 func Test4Digit(t *testing.T) {
 	a := "1234"
 	b := "5678"
 	correct := "7006652"
+	if prod := Multiply(a, b); prod != correct {
+		t.Fatal(a, "*", b, "is incorrect, expected:", correct, "received:", prod)
+	}
+}
+
+func Test4DigitSimple(t *testing.T) {
+	a := "1234"
+	b := "4321"
+	correct := "5332114"
 	if prod := Multiply(a, b); prod != correct {
 		t.Fatal(a, "*", b, "is incorrect, expected:", correct, "received:", prod)
 	}
