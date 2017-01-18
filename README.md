@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-  product := karatsuba.Multiply("1234" "5678") // "7006652"
-  fmt.Println(product)
+  product := karatsuba.Multiply("1234" "5678")
+  fmt.Println(product) // "7006652"
 }
 ```
