@@ -36,8 +36,8 @@ func Multiply(a, b string) string {
 	z2 := Multiply(high1, high2)
 
 	t0 := sub(sub(z1, z2), z0)
-	t1 := add(addZeroEnd(z0, m*2), addZeroEnd(t0, m))
-	t2 := add(t1, z2)
+	t1 := add(addZeroEnd(z2, m*2), addZeroEnd(t0, m))
+	t2 := add(t1, z0)
 	return trim(t2)
 }
 
@@ -47,8 +47,8 @@ func getMiddle(a, b string) int {
 }
 
 func splitNum(s string, m int) (string, string) {
-	high := s[m:]
-	low := s[:m]
+	high := s[:m]
+	low := s[m:]
 	return high, low
 }
 
